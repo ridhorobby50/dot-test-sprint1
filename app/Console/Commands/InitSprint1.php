@@ -50,7 +50,7 @@ class InitSprint1 extends Command
         $this->syncCity();
         $this->info('Sync City executed');
 
-        $this->info('Migration and custom logic completed.');
+        $this->info('Migration and sync completed.');
 
         
     }

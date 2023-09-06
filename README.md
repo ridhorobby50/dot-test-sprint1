@@ -1,7 +1,9 @@
-## Dot Test Sprint 1
+# Dot Test Sprint 1
 
 Aplikasi ini dibuat untuk tujuan test DOT PHP Developer dan untuk soal Sprint 1, Lakukan langkah dibawah untuk menginstal aplikasi
 
+
+## Instalasi
 - Pastikan anda telah membuat database untuk menampung data migration dari Laravel
 - Copy isi dari .env.example dan buatlah file .env. Pastekan isi dari .env.example ke file .env yang baru dibuat
 - Ubah Detail pada env dari DB_HOST sampai DB_PASSWORD sesuai environtment pada perangkat anda
