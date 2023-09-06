@@ -20,7 +20,12 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 
-Route::prefix('/search')->group(function () {
-    Route::get('/province', [ProvinceController::class, 'detail']);
-    Route::get('/cities', [CityController::class, 'detail']);   
+
+Route::prefix("v1")->group(function(){
+    Route::prefix('/search')->group(function () {
+        Route::get('/province', [ProvinceController::class, 'getData']);
+        Route::get('/cities', [CityController::class, 'getData']);   
+    });
+
+    
 });

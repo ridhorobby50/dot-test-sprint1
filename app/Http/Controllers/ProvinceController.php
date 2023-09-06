@@ -32,9 +32,14 @@ class ProvinceController extends Controller
         }
     }
 
-    public function detail(Request $request){
-        $id = $request->id;
-        $data = Province::find($id);
+    public function getData(Request $request){
+        $id = $request->id ?? 0;
+        if($id==0){
+            $data = Province::get();
+        }else{
+            $data = Province::find($id);
+        }
+        
         return response()->json(ResponseApi($data, "Success get data province"), 200);
     }
 }

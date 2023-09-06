@@ -34,13 +34,25 @@ class CityController extends Controller
         }
     }
 
-    public function detail(Request $request){
+    public function getData(Request $request){
+
+        $id = $request->id ?? 0;
+        if($id==0){
+            $data = City::with([
+                'province' => function ($query) {
+                    $query->select('province_id', 'province_name');
+                }
+            ])->get();
+        }else{
+            $data = City::with([
+                'province' => function ($query) {
+                    $query->select('province_id', 'province_name');
+                }
+            ])->find($id);
+        }
+
         $id = $request->id;
-        $data = City::with([
-            'province' => function ($query) {
-                $query->select('province_id', 'province_name');
-            }
-        ])->find($id);
+        
         return response()->json(ResponseApi($data, "Success get data city"), 200);
     }
 }
