@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\City;
 use Illuminate\Http\Request;
-
+use \Illuminate\Auth\AuthenticationException;
 class CityController extends Controller
 {
     public $route = "city";
@@ -15,7 +15,6 @@ class CityController extends Controller
         try {
             list($statusCode, $response) = getGuzzle($url, [], $token);
             $response = $response["rajaongkir"];
-            // echo "<pre>";print_r($response);"</pre>";die();
             if($response['status']['code']==200){
                 $data_insert = [];
                 foreach ($response["results"] as $key => $value) {
@@ -32,13 +31,16 @@ class CityController extends Controller
                 City::insert($data_insert);
             }
         } catch (AuthenticationException $e) {
-            return redirect('login');
         }
     }
 
     public function detail(Request $request){
         $id = $request->id;
-        $data = City::find($id);
+        $data = City::with([
+            'province' => function ($query) {
+                $query->select('province_id', 'province_name');
+            }
+        ])->find($id);
         return response()->json(ResponseApi($data, "Success get data city"), 200);
     }
 }

@@ -16,7 +16,6 @@ class ProvinceController extends Controller
         try {
             list($statusCode, $response) = getGuzzle($url, [], $token);
             $response = $response["rajaongkir"];
-            // echo "<pre>";print_r($response);"</pre>";die();
             if($response['status']['code']==200){
                 $data_insert = [];
                 foreach ($response["results"] as $key => $value) {
@@ -30,7 +29,6 @@ class ProvinceController extends Controller
                 Province::insert($data_insert);
             }
         } catch (AuthenticationException $e) {
-            return redirect('login');
         }
     }
 
